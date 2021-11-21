@@ -1,0 +1,7 @@
+.recipeProgress {
+  text-decoration: line-through;
+}
+
+.check-btn {
+  visibility: hidden;
+}
