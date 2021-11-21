@@ -1,35 +1,49 @@
 import React, { useContext } from 'react';
 import P from 'prop-types';
 import { Link } from 'react-router-dom';
-import profileIcon from '../images/profileIcon.svg';
-import searchIcon from '../images/searchIcon.svg';
+import { Box, AppBar, Typography } from '@material-ui/core';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Search from '@material-ui/icons/Search';
 import GlobalContext from '../context/GlobalContext';
 
 function Header({ title = '', hasBtn = true }) {
   const { setShowBar } = useContext(GlobalContext);
   return (
-    <header>
-      <h1 data-testid="page-title">{ title }</h1>
-      <Link to="/perfil">
-        <button
-          type="button"
-        >
-          <img data-testid="profile-top-btn" src={ profileIcon } alt="Profile" />
-        </button>
-      </Link>
-
-      {
-        hasBtn
-        && (
-          <button
-            type="button"
-            onClick={ () => setShowBar((s) => !s) }
-          >
-            <img data-testid="search-top-btn" src={ searchIcon } alt="Search" />
-          </button>
-        )
-      }
-    </header>
+    <Box>
+      <AppBar
+        position="static"
+        sx={ {
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          paddingLeft: 1,
+          paddingRight: 1,
+        } }
+      >
+        <Link to="/perfil">
+          <AccountCircle
+            sx={{
+              color: '#FFF',
+              fontSize: 45,
+            }}
+          />
+        </Link>
+        <Typography variant="h4">{ title }</Typography>
+        {
+          hasBtn
+          && (
+              <Search
+                onClick={ () => setShowBar((s) => !s) }
+                sx={{
+                  color: '#FFF',
+                  fontSize: 45,
+                }}
+              />
+          )
+        }
+      </AppBar>
+    </Box>
   );
 }
 

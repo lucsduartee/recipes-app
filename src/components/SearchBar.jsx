@@ -1,4 +1,13 @@
 import React, { useContext, useState } from 'react';
+import {
+  FormControl,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Button,
+  Container,
+  TextField,
+} from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import GlobalContext from '../context/GlobalContext';
 
@@ -52,54 +61,49 @@ function SearchBar() {
   };
 
   return (
-    <form>
-      <input
-        data-testid="search-input"
-        value={ search }
-        type="text"
-        onChange={ ({ target }) => setSearch(target.value) }
-      />
-      <label htmlFor="ingredient">
-        <input
-          data-testid="ingredient-search-radio"
-          name="options-search"
-          type="radio"
-          id="ingredient"
-          value="ingredient"
-          onChange={ ({ target }) => setOption(target.value) }
-        />
-        Ingrediente
-      </label>
-      <label htmlFor="name">
-        <input
-          data-testid="name-search-radio"
-          name="options-search"
-          type="radio"
-          id="name"
-          value="name"
-          onChange={ ({ target }) => setOption(target.value) }
-        />
-        Nome
-      </label>
-      <label htmlFor="first-letter">
-        <input
-          data-testid="first-letter-search-radio"
-          name="options-search"
-          type="radio"
-          id="first-letter"
-          value="initialLetter"
-          onChange={ ({ target }) => setOption(target.value) }
-        />
-        Letra Inicial
-      </label>
-      <button
-        type="button"
-        data-testid="exec-search-btn"
-        onClick={ () => requestSwitch(pathname, option, search) }
+    <Container>
+      <FormControl
+        component="form"
       >
-        Buscar
-      </button>
-    </form>);
+        <RadioGroup
+          aria-label="gender"
+          defaultValue="female"
+          name="radio-buttons-group"
+          row
+        >
+          <FormControlLabel
+            value="ingredient"
+            control={ <Radio /> }
+            label="Ingrediente"
+            onChange={ ({ target }) => setOption(target.value) }
+          />
+          <FormControlLabel
+            value="name"
+            control={ <Radio /> }
+            label="Nome"
+            onChange={ ({ target }) => setOption(target.value) }
+          />
+          <FormControlLabel
+            value="initialLetter"
+            control={ <Radio /> }
+            label="Letra Inicial"
+            onChange={ ({ target }) => setOption(target.value) }
+          />
+        </RadioGroup>
+        <TextField
+          value={ search }
+          variant="outlined"
+          label="Ingrediente, nome..."
+          onChange={ ({ target }) => setSearch(target.value) }
+        />
+        <Button
+          variant="contained"
+          onClick={ () => requestSwitch(pathname, option, search) }
+        >
+          Buscar
+        </Button>
+      </FormControl>
+    </Container>);
 }
 
 export default SearchBar;
