@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import {
+  ButtonGroup,
+  Button,
+  Container,
+  Typography,
+} from '@material-ui/core';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
@@ -21,26 +27,42 @@ function Perfil() {
 
   return (
     <>
-      <Header title="Perfil" hasBtn={ false } />
-      <div>
-        <p data-testid="profile-email">
-          { playerEmail !== null && playerEmail.email }
-        </p>
-        <Link to="/receitas-feitas">
-          <button type="button" data-testid="profile-done-btn">
-            Receitas Feitas
-          </button>
-        </Link>
-        <Link to="/receitas-favoritas">
-          <button type="button" data-testid="profile-favorite-btn">
-            Receitas Favoritas
-          </button>
-        </Link>
-        <button type="button" data-testid="profile-logout-btn" onClick={ onClick }>
-          Sair
-        </button>
-        <Footer />
-      </div>
+      <Header title="Profile" hasBtn={ false } />
+      <Container
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          marginTop: 5,
+        }}
+      >
+        <Typography variant="h5" data-testid="profile-email">
+          User: { playerEmail !== null && playerEmail.email }
+        </Typography>
+        <ButtonGroup
+          orientation="vertical"
+          sx={{
+            marginTop: 5,
+          }}
+        >
+          <Button
+            onClick={ () => history.push('/receitas-feitas') }
+          >
+            Recipes Done
+          </Button>
+          <Button
+            onClick={ () => history.push('/receitas-favoritas')}
+          >
+            Favorite Recipes
+          </Button>
+          <Button
+            onClick={ onClick }
+          >
+            Logout
+          </Button>
+        </ButtonGroup>
+      </Container>
+      <Footer />
     </>
   );
 }
