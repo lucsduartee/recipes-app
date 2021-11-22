@@ -29,7 +29,7 @@ function Header({ title = '', hasBtn = true }) {
             }}
           />
         </Link>
-        <Typography variant="h4">{ title }</Typography>
+        <Typography variant="h5">{ title }</Typography>
         {
           hasBtn
           && (
