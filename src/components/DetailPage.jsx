@@ -153,7 +153,7 @@ function DetailPage({ api, nameandMeasure, recomendations, url }) {
           type="button"
           onClick={ saveFavorite }
         >
-          { isFavorite ? <Favorite /> : <FavoriteBorder /> }
+          { isFavorite ? <Favorite color="secondary"/> : <FavoriteBorder /> }
         </IconButton>
         <ExpandMore
           expand={expanded}

@@ -37,7 +37,6 @@ function FoodInProgress({ match: { params: { id } } }) {
     saveFavoriteMeal, setisFavorite } = useContext(GlobalContext);
   const [api, saveApi] = useState({});
   const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState(false);
   const [check, setCheck] = useState([]);
   const history = useHistory();
 
@@ -141,10 +140,10 @@ function FoodInProgress({ match: { params: { id } } }) {
           type="button"
           onClick={ () => saveFavoriteMeal(api.meals[0]) }
         >
-          { isFavorite ? <Favorite /> : <FavoriteBorder /> }
+          { isFavorite ? <Favorite color="secondary"/> : <FavoriteBorder /> }
         </IconButton>
         <FormGroup>
-          { listIngredient(api, 'meals').map((ingredient, index) => (
+          { listIngredient(api, 'meals').map((ingredient) => (
             ingredient !== undefined && (
               <FormControlLabel
                 className={ check[ingredient] === true && 'recipeProgress' }

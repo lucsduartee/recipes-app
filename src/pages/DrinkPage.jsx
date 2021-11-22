@@ -90,6 +90,7 @@ function DrinkPage(props) {
           sx={{
             marginTop: 2,
             marginBottom: 2,
+            zIndex: 1000,
           }}
         >
           { progress

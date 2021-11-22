@@ -73,10 +73,10 @@ function FoodPage(props) {
       }}
     >
       <DetailPage
-      api={ api[0] }
-      nameandMeasure={ nameandMeasures }
-      recomendations={ recomendations }
-      url={ url }
+        api={ api[0] }
+        nameandMeasure={ nameandMeasures }
+        recomendations={ recomendations }
+        url={ url }
       />
       <div className={ done ? 'hidden' : 'visible' }>
         <Button
@@ -88,6 +88,7 @@ function FoodPage(props) {
           sx={{
             marginTop: 2,
             marginBottom: 2,
+            zIndex: 1000,
           }}
         >
           { progress

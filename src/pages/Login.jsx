@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { TextField, Button, Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import logo from '../images/logo.png';
 
 const containerStyles = makeStyles({
@@ -119,6 +120,7 @@ function Login() {
             variant="contained"
             disabled={ disable }
             className={ styles.button }
+            endIcon={ <ExitToAppIcon /> }
           >
             Sign In
           </Button>

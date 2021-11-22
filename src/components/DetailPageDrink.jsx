@@ -34,7 +34,6 @@ function DetailPageDrink({ api, nameandMeasure, recomendations, url }) {
   const [isFavorite, setisFavorite] = useState(false);
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const [message, setMessage] = useState(false);
   const history = useHistory();
   const MAX_RECOMENDATIONS = 6;
 
@@ -152,7 +151,7 @@ function DetailPageDrink({ api, nameandMeasure, recomendations, url }) {
           type="button"
           onClick={ saveFavorite }
         >
-          { isFavorite ? <Favorite /> : <FavoriteBorder /> }
+          { isFavorite ? <Favorite color="secondary"/> : <FavoriteBorder /> }
         </IconButton>
         <ExpandMore
           expand={expanded}

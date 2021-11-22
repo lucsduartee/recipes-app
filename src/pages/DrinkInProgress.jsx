@@ -1,11 +1,31 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {
+  Card,
+  CardMedia,
+  CardHeader,
+  IconButton,
+  Avatar,
+  CardContent,
+  Button,
+  Snackbar,
+  FormGroup,
+  Checkbox,
+  FormControlLabel,
+} from '@material-ui/core';
+import LocalBarIcon from '@material-ui/icons/LocalBar';
+import CloseIcon from '@material-ui/icons/Close';
+import ShareIcon from '@material-ui/icons/Share';
+import Favorite from '@material-ui/icons/Favorite';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+import DoneAllIcon from '@material-ui/icons/DoneAll';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import GlobalContext from '../context/GlobalContext';
 import '../css/recipeProgress.css';
+import Footer from '../components/Footer';
 
 if (!JSON.parse(localStorage.getItem('inProgressRecipes'))) {
   localStorage.setItem('inProgressRecipes', JSON.stringify({ cocktails: {},
@@ -19,6 +39,7 @@ function DrinkInProgress({ match: { params: { id } } }) {
   const { listIngredient, isFavorite, saveFavoriteDrink,
     setisFavorite } = useContext(GlobalContext);
   const [api, saveApi] = useState({});
+  const [open, setOpen] = useState(false);
   const [message, setMessage] = useState(false);
   const [check, setCheck] = useState({
     ingredientName: '',
@@ -46,6 +67,14 @@ function DrinkInProgress({ match: { params: { id } } }) {
     })();
   }, []);
 
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   const handleClick = ({ target }) => {
     setCheck({ ...check, [target.name]: target.checked });
     const progressRecipe = { ...progressRecipes,
@@ -62,73 +91,108 @@ function DrinkInProgress({ match: { params: { id } } }) {
     }
   };
 
-  const drinkProgress = () => (
-    <div>
-      <img
-        src={ api.drinks[0].strDrinkThumb }
-        data-testid="recipe-photo"
-        alt="recipe name"
-      />
-      <h2 data-testid="recipe-title">{api.drinks[0].strDrink}</h2>
-      <button
-        type="button"
-        data-testid="share-btn"
-        // https://stackoverflow.com/questions/39501289/in-reactjs-how-to-copy-text-to-clipboard
-        // Gary Vernon Grubb
-        onClick={ () => {
-          window.navigator.clipboard.writeText(`http://localhost:3000${id}`);
-          setMessage(true);
-        } }
+  const action = (
+    <React.Fragment>
+      <Button color="secondary" size="small" onClick={handleClose}>
+        UNDO
+      </Button>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
       >
-        <img src={ shareIcon } alt="Compartilhar" />
-        { message && <p>Link copiado!</p> }
-      </button>
-      <button
-        type="button"
-        onClick={ () => saveFavoriteDrink(api.drinks[0]) }
-      >
-        <img
-          data-testid="favorite-btn"
-          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-          alt="botão de favoritar"
-        />
-      </button>
-      <h4 data-testid="recipe-category">{api.drinks[0].strCategory}</h4>
-      { listIngredient(api, 'drinks').map((ingredient, index) => (
-        ingredient !== '' && (
-          <label
-            data-testid={ `${index}-ingredient-step` }
-            htmlFor={ `${index}-ingredient-step` }
-            key={ index }
-            className={ check[ingredient] === true && 'recipeProgress' }
-          >
-            {ingredient}
-            <input
-              type="checkbox"
-              name={ ingredient }
-              id={ `${index}-ingredient-step` }
-              onClick={ handleClick }
-            />
-          </label>)
-      ))}
-      <h2>Instructions</h2>
-      <p data-testid="instructions">
-        {api.drinks[0].strInstructions}
-      </p>
-      <button
-        onClick={ () => history.push('/receitas-feitas') }
-        type="button"
-        disabled={ (() => {
-          const checkvalue = Object.values(check)
-            .some((ingredient) => ingredient === false);
-          return checkvalue;
-        })() }
-        data-testid="finish-recipe-btn"
-      >
-        Finalizar receita
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
 
-      </button>
-    </div>
+  const drinkProgress = () => (
+    <Card sx={{ maxWidth: '90%', margin: '0 auto'}}>
+      <CardHeader
+        avatar={
+          <Avatar sx={{ bgcolor: '#428e92' }} aria-label="recipe">
+            {api.drinks[0].strDrink[0]}
+          </Avatar>
+        }
+        action={
+          <IconButton
+            aria-label="settings"
+            onClick={ () => history.push('/bebidas')}
+          >
+            <LocalBarIcon/>
+          </IconButton>
+        }
+        title={`Category: ${api.drinks[0].strCategory}`}
+      />
+      <CardMedia
+        component="img"
+        height="194"
+        image={ api.drinks[0].strDrinkThumb }
+        alt={ api.drinks[0].strDrink }
+      />
+      <CardContent>
+        <h2 data-testid="recipe-title">{api.drinks[0].strDrink}</h2>
+        <IconButton
+          // https://stackoverflow.com/questions/39501289/in-reactjs-how-to-copy-text-to-clipboard
+          // Gary Vernon Grubb
+          onClick={ () => {
+            window.navigator.clipboard.writeText(`http://localhost:3000/bebidas/${api.drinks[0].idDrink}`);
+            setOpen(true);
+          } }
+        >
+          <ShareIcon />
+        </IconButton>
+        <IconButton
+          type="button"
+          onClick={ () => saveFavoriteDrink(api.drinks[0]) }
+        >
+          { isFavorite ? <Favorite color="secondary"/> : <FavoriteBorder /> }
+        </IconButton>
+        <FormGroup>
+          { listIngredient(api, 'drinks').map((ingredient) => (
+            ingredient !== '' && (
+              <FormControlLabel
+                className={ check[ingredient] === true && 'recipeProgress' }
+                control={
+                  <Checkbox
+                    name={ ingredient }
+                    onClick={ handleClick }
+                  />
+                }
+                label={ ingredient }
+                onClick={ handleClick }
+            />
+            )
+          ))}
+        </FormGroup>
+        <p data-testid="instructions">
+          <h3>Instructions</h3>
+          {api.drinks[0].strInstructions}
+        </p>
+        <Button
+          variant="outlined"
+          color="secondary"
+          endIcon={ <DoneAllIcon />}
+          onClick={ () => history.push('/receitas-feitas') }
+          disabled={ (() => {
+            const checkvalue = Object.values(check)
+              .some((ingredient) => ingredient === false);
+            return checkvalue;
+          })() }
+        >
+          Finish Recipe
+        </Button>
+      </CardContent>
+      <Snackbar
+        open={open}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        message="Link copied"
+        action={action}
+      />
+      <Footer />
+    </Card>
   );
 
   return (
