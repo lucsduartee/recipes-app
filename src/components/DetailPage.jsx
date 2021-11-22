@@ -19,8 +19,8 @@ import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import RestaurantIcon from '@material-ui/icons/Restaurant';
-import RecomendationsCard from './RecomendationsCard';
 import { useHistory } from 'react-router';
+import RecomendationsCard from './RecomendationsCard';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;

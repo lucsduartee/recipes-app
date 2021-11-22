@@ -1,9 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import { Button } from '@material-ui/core';
+import { Button, Container } from '@material-ui/core';
+import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
+import RestoreIcon from '@material-ui/icons/Restore';
 import DetailPageDrink from '../components/DetailPageDrink';
 import GlobalContext from '../context/GlobalContext';
+import Footer from '../components/Footer';
 import '../css/Recomendations.css';
 
 function DrinkPage(props) {
@@ -62,7 +65,15 @@ function DrinkPage(props) {
   if (loading) return <h1>loading</h1>;
 
   return (
-    <>
+    <Container
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+      }}
+    >
       <DetailPageDrink
         api={ api[0] }
         nameandMeasure={ nameandMeasures }
@@ -70,18 +81,24 @@ function DrinkPage(props) {
         url={ url }
       />
       <div className={ done ? 'hidden' : 'visible' }>
-        <Button
-          data-testid="start-recipe-btn"
-          className="botton-recipe"
+      <Button
           onClick={ () => saveLocal() }
           type="button"
+          variant="contained"
+          color={progress ? "secondary" : "primary" }
+          endIcon={progress ? <RestoreIcon /> : <PlayCircleFilledIcon /> }
+          sx={{
+            marginTop: 2,
+            marginBottom: 2,
+          }}
         >
           { progress
-            ? 'Continuar Receita'
-            : 'Iniciar Receita' }
+            ? 'continue recipe'
+            : 'Start Recipe' }
         </Button>
       </div>
-    </>
+      <Footer />
+    </Container>
   );
 }
 

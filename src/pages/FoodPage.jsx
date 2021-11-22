@@ -14,7 +14,6 @@ function FoodPage(props) {
   const { match: { url } } = props;
   const history = useHistory();
   const { getLocal, progress, done } = useContext(GlobalContext);
-  console.log('comidasdone', done);
   const [api, saveApi] = useState({});
   const [recomendations, setRecomendations] = useState({});
   const [loading, setLoading] = useState(true);
@@ -92,8 +91,8 @@ function FoodPage(props) {
           }}
         >
           { progress
-            ? 'Continuar Receita'
-            : 'Iniciar Receita' }
+            ? 'continue recipe'
+            : 'Start Recipe' }
         </Button>
       </div>
       <Footer />
