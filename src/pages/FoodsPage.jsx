@@ -18,7 +18,7 @@ function FoodsPage() {
 
   return (
     <>
-      <Header title="Comidas" />
+      <Header title="Meals" />
       <FilterMeal />
       {showBar && <SearchBar />}
       {

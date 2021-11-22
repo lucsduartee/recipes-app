@@ -22,7 +22,7 @@ function DrinksPage() {
 
   return (
     <div>
-      <Header title="Bebidas" />
+      <Header title="Drinks" />
       <FilterDrink />
       {showBar && <SearchBar />}
       {

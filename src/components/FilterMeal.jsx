@@ -24,13 +24,20 @@ function FilterMeal() {
   };
 
   return (
-    <Container>
+    <Container 
+      sx={ {
+        marginBottom: 2,
+        marginTop: 2,
+        display: 'flex',
+        justifyContent: 'center',
+    } }>
       <ButtonGroup
         size="small"
         variant="text"
         sx={ {
           display: 'flex',
           flexWrap: 'wrap',
+          maxWidth: '100%',
         } }
       >
         {categoryMeals.meals && categoryMeals.meals

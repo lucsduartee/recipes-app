@@ -24,28 +24,31 @@ function FilterDrink() {
   };
 
   return (
-    <Container>
+    <Container 
+      sx={ {
+        marginBottom: 2,
+        marginTop: 2,
+        display: 'flex',
+        justifyContent: 'center',
+    } }>
       <ButtonGroup
-        size="large"
+        size="small"
         variant="text"
         sx={ {
-          borderBottom: 1,
-        } }      
+          display: 'flex',
+          flexWrap: 'wrap',
+          maxWidth: '100%',
+        } }
       >
         {categoryDrinks.drinks && categoryDrinks.drinks
           .map((category, index) => (index < MAX_MAP && (
             <Button
-              type="button"
-              key={ index }
-              data-testid={ `${category.strCategory}-category-filter` }
               onClick={ () => handleClick(category.strCategory) }
             >
               {category.strCategory}
             </Button>
           )))}
         <Button
-          type="button"
-          data-testid="All-category-filter"
           onClick={ () => handleClick('All') }
         >
           All

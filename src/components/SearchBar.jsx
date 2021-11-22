@@ -20,7 +20,6 @@ function SearchBar() {
   const { location: { pathname } } = history;
 
   const trow = (json, type, path, id) => {
-    console.log(json);
     if (json[type] === null) {
       return global.alert(
         'Sinto muito, não encontramos nenhuma receita para esses filtros.',
@@ -61,7 +60,13 @@ function SearchBar() {
   };
 
   return (
-    <Container>
+    <Container sx={ {
+      marginBottom: 2,
+      maxWidth: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+      } }
+    >
       <FormControl
         component="form"
       >
@@ -74,19 +79,19 @@ function SearchBar() {
           <FormControlLabel
             value="ingredient"
             control={ <Radio /> }
-            label="Ingrediente"
+            label="Ingredient"
             onChange={ ({ target }) => setOption(target.value) }
           />
           <FormControlLabel
             value="name"
             control={ <Radio /> }
-            label="Nome"
+            label="Name"
             onChange={ ({ target }) => setOption(target.value) }
           />
           <FormControlLabel
             value="initialLetter"
             control={ <Radio /> }
-            label="Letra Inicial"
+            label="First Letter"
             onChange={ ({ target }) => setOption(target.value) }
           />
         </RadioGroup>

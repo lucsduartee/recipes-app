@@ -18,9 +18,10 @@ const theme = createTheme({
       light: '#428e92',
       dark: '#00363a',
     },
-    background: 'rgb(255,228,175)',
-  },
-})
+    background: {
+      default: '#00363a',
+    },
+}});
 
 function App() {
   return (
