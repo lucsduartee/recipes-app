@@ -1,16 +1,31 @@
 import React from 'react';
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  Container,
+} from '@material-ui/core';
 import P from 'prop-types';
 
-function RecipeCard({ src, str, id }) {
+function RecipeCard({ src, str }) {
   return (
-    <div data-testid={ `${id}-recipe-card` }>
-      <img
-        data-testid={ `${id}-card-img` }
-        src={ src }
-        alt={ str }
-      />
-      <p data-testid={ `${id}-card-name` }>{ str }</p>
-    </div>
+    <Container sx={ {
+      marginBottom: 2,
+      } }
+    >
+      <Card sx={{ maxWidth: '100%' }}>
+        <CardMedia
+          component="img"
+          height="140"
+          image={ src }
+          alt={ str }
+        />
+        <CardContent>
+          <Typography variant="h5">{ str }</Typography>  
+        </CardContent>
+      </Card>
+    </Container>
   );
 }
 
