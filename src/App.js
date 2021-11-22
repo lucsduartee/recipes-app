@@ -27,7 +27,7 @@ function App() {
   return (
     <ThemeProvider theme={ theme }>
       <GlobalProvider>
-        <BrowserRouter>
+        <BrowserRouter basename="/recipes-app">
           <Switcher />
         </BrowserRouter>
       </GlobalProvider>
