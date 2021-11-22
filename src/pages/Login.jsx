@@ -76,7 +76,7 @@ function Login() {
           className={ styles.logo }
         />
         <h1 className={ styles.title } >
-          App de Receitas
+          Recipes App
         </h1>
         <form className={ styles.form } id="login">
           <Container
@@ -105,7 +105,7 @@ function Login() {
               onChange={ ({ target }) => savePassword(target.value) }
               type="password"
               data-testid="password-input"
-              label="Senha"
+              label="Password"
               variant="outlined"
               required
               className={ styles.inputs }
@@ -120,7 +120,7 @@ function Login() {
             disabled={ disable }
             className={ styles.button }
           >
-            Entrar
+            Sign In
           </Button>
         </form>
       </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import { Button } from '@material-ui/core';
 import DetailPageDrink from '../components/DetailPageDrink';
 import GlobalContext from '../context/GlobalContext';
 import '../css/Recomendations.css';
@@ -69,14 +70,16 @@ function DrinkPage(props) {
         url={ url }
       />
       <div className={ done ? 'hidden' : 'visible' }>
-        <button
+        <Button
           data-testid="start-recipe-btn"
           className="botton-recipe"
           onClick={ () => saveLocal() }
           type="button"
         >
-          { progress ? 'Continuar Receita' : 'Iniciar Receita' }
-        </button>
+          { progress
+            ? 'Continuar Receita'
+            : 'Iniciar Receita' }
+        </Button>
       </div>
     </>
   );

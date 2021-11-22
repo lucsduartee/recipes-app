@@ -98,14 +98,14 @@ function SearchBar() {
         <TextField
           value={ search }
           variant="outlined"
-          label="Ingrediente, nome..."
+          label="Ingredient, name or first letter..."
           onChange={ ({ target }) => setSearch(target.value) }
         />
         <Button
           variant="contained"
           onClick={ () => requestSwitch(pathname, option, search) }
         >
-          Buscar
+          Search
         </Button>
       </FormControl>
     </Container>);
