@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { Container, ButtonGroup, Button } from '@material-ui/core';
 import FavoriteCard from '../components/FavoriteCard';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function FavoritesRecipes() {
   const [shouldUpdate, setShouldUpdateFavorite] = useState(false);
@@ -15,41 +17,48 @@ function FavoritesRecipes() {
 
   return (
     <div>
-      <Header title="Receitas Favoritas" hasBtn={ false } />
-      <div>
-        <button
-          type="button"
-          onClick={ () => setFilter('comida') }
-          data-testid="filter-by-food-btn"
+      <Header title="Favorite Recipes" hasBtn={ false } />
+      <Container
+        sx={{
+          marginTop: 3,
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <ButtonGroup
+          sx={{
+            alignSelf: 'center',
+          }}
         >
-          Food
-        </button>
-        <button
-          type="button"
-          onClick={ () => setFilter('bebida') }
-          data-testid="filter-by-drink-btn"
-        >
-          Drink
-        </button>
-        <button
-          type="button"
-          onClick={ () => setFilter('all') }
-          data-testid="filter-by-all-btn"
-        >
-          All
-        </button>
-      </div>
-
-      { getStorage() !== null && getStorage()
-        .filter((favorite) => (filter === 'all' ? favorite : favorite.type === filter))
-        .map((favorite, index) => (
-          <FavoriteCard
-            setUpdate={ setShouldUpdateFavorite }
-            key={ index }
-            index={ index }
-            favorite={ favorite }
-          />
-        ))}
+          <Button
+            onClick={ () => setFilter('comida') }
+          >
+            Food
+          </Button>
+          <Button
+            onClick={ () => setFilter('bebida') }
+          >
+            Drink
+          </Button>
+          <Button
+            onClick={ () => setFilter('all') }
+          >
+            All
+          </Button>
+        </ButtonGroup>
+        { getStorage() !== null && getStorage()
+          .filter((favorite) => (filter === 'all' ? favorite : favorite.type === filter))
+          .map((favorite, index) => (
+            <FavoriteCard
+              setUpdate={ setShouldUpdateFavorite }
+              key={ index }
+              index={ index }
+              favorite={ favorite }
+            />
+          ))}
+      </Container>
+      <Footer />
     </div>
   );
 }

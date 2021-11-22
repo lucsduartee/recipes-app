@@ -12,7 +12,7 @@ function RecipesDone() {
 
   return (
     <div>
-      <Header title="Receitas Feitas" hasBtn={ false } />
+      <Header title="Recipes Done" hasBtn={ false } />
       <div>
         <button
           onClick={ () => setFilter('comida') }
