@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Container } from '@material-ui/core';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import IngredientCardFood from '../components/IngredientCardFood';
@@ -19,8 +20,15 @@ function ExploreIngredientsFoods() {
 
   return (
     <div>
-      <Header title="Explorar Ingredientes" hasBtn={ false } />
-      <div>
+      <Header title="Explore Ingredients" hasBtn={ false } />
+      <Container
+        sx={{
+          marginTop: 3,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 2,
+        }}
+      >
         { ingredients && ingredients.meals.map((ingredient, index) => (
           index <= MAX_NUMBER && (
             <div
@@ -34,7 +42,7 @@ function ExploreIngredientsFoods() {
             </div>
           )
         ))}
-      </div>
+      </Container>
       <Footer />
     </div>
   );

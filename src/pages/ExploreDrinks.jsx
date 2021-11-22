@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { ButtonGroup, Container, Button } from '@material-ui/core';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
@@ -17,23 +18,32 @@ function ExploreDrinks() {
 
   return (
     <div>
-      <Header title="Explorar Bebidas" hasBtn={ false } />
-      <div>
-        <button
-          data-testid="explore-by-ingredient"
-          type="button"
-          onClick={ () => history.push('/explorar/bebidas/ingredientes') }
-        >
-          Por Ingredientes
-        </button>
-        <button
-          data-testid="explore-surprise"
-          type="button"
-          onClick={ () => history.push(`/bebidas/${surprise.drinks[0].idDrink}`) }
-        >
-          Me Surpreenda!
-        </button>
-      </div>
+      <Header title="Explore Drinks" hasBtn={ false } />
+      <Container
+        sx={{
+          marginTop: 3,
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <ButtonGroup orientation="vertical">
+          <Button
+            data-testid="explore-by-ingredient"
+            type="button"
+            onClick={ () => history.push('/explorar/bebidas/ingredientes') }
+          >
+            By ingredients
+          </Button>
+          <Button
+            data-testid="explore-surprise"
+            type="button"
+            onClick={ () => history.push(`/bebidas/${surprise.drinks[0].idDrink}`) }
+          >
+            Surprise me!
+          </Button>
+        </ButtonGroup>
+      </Container>
       <Footer />
     </div>
   );

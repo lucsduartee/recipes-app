@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ButtonGroup, Container, Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -17,30 +18,41 @@ function ExploreFoods() {
 
   return (
     <div>
-      <Header title="Explorar Comidas" hasBtn={ false } />
-      <div>
-        <button
-          data-testid="explore-by-ingredient"
-          type="button"
-          onClick={ () => history.push('/explorar/comidas/ingredientes') }
+      <Header title="Explore Meals" hasBtn={ false } />
+      <Container
+        sx={{
+          marginTop: 3,
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <ButtonGroup
+          orientation="vertical"
         >
-          Por Ingredientes
-        </button>
-        <button
-          data-testid="explore-surprise"
-          type="button"
-          onClick={ () => history.push(`/comidas/${surprise.meals[0].idMeal}`) }
-        >
-          Me Surpreenda!
-        </button>
-        <button
-          data-testid="explore-by-area"
-          type="button"
-          onClick={ () => history.push('/explorar/comidas/area') }
-        >
-          Por Local de Origem
-        </button>
-      </div>
+          <Button
+            data-testid="explore-by-ingredient"
+            type="button"
+            onClick={ () => history.push('/explorar/comidas/ingredientes') }
+          >
+            By ingredients
+          </Button>
+          <Button
+            data-testid="explore-surprise"
+            type="button"
+            onClick={ () => history.push(`/comidas/${surprise.meals[0].idMeal}`) }
+          >
+            Surprise me!
+          </Button>
+          <Button
+            data-testid="explore-by-area"
+            type="button"
+            onClick={ () => history.push('/explorar/comidas/area') }
+          >
+            By place of origin
+          </Button>
+        </ButtonGroup>
+      </Container>
       <Footer />
     </div>
   );

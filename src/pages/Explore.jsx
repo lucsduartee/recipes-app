@@ -1,30 +1,40 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { ButtonGroup, Container, Button } from '@material-ui/core';
 
 function Explore() {
+  const history = useHistory();
+
   return (
     <div>
-      <Header title="Explorar" hasBtn={ false } />
-      <div>
-        <Link to="/explorar/comidas">
-          <button
-            type="button"
-            data-testid="explore-food"
+      <Header title="Explore" hasBtn={ false } />
+      <Container
+        sx={{
+          marginTop: 3,
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <ButtonGroup
+          sx={{
+            alignSelf: 'center',
+          }}
+        >
+          <Button
+            onClick={ () => history.push('/explorar/comidas') }
           >
-            Explorar Comidas
-          </button>
-        </Link>
-        <Link to="/explorar/bebidas">
-          <button
-            type="button"
-            data-testid="explore-drinks"
+            Explore Meals
+          </Button>
+          <Button
+            onClick={ () => history.push('/explorar/bebidas') }
           >
-            Explorar Bebidas
-          </button>
-        </Link>
-      </div>
+            Explore Drinks
+          </Button>
+        </ButtonGroup>
+      </Container>
       <Footer />
     </div>
   );

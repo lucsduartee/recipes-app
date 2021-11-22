@@ -1,20 +1,28 @@
 import React from 'react';
 import P from 'prop-types';
+import { Card, CardContent, CardMedia } from '@material-ui/core';
 
 function IngredientCardFood({ index, ingredient }) {
   return (
-    <>
-      <img
-        src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
+    <Card
+      sx={{
+        maxWidth: '100%',
+      }}
+    >
+      <CardMedia
+        image={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}.png` }
         alt={ ingredient.strIngredient }
-        data-testid={ `${index}-card-img` }
+        component="img"
+        height="140"
       />
-      <h3
-        data-testid={ `${index}-card-name` }
-      >
-        { ingredient.strIngredient }
-      </h3>
-    </>
+      <CardContent>
+        <h3
+          data-testid={ `${index}-card-name` }
+        >
+          { ingredient.strIngredient }
+        </h3>
+      </CardContent>
+    </Card>
   );
 }
 
