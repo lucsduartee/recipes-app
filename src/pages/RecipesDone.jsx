@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
+import { Container, ButtonGroup, Button } from '@material-ui/core';
 import RecipesDoneCard from '../components/RecipesDoneCard';
 
 function RecipesDone() {
@@ -13,29 +14,36 @@ function RecipesDone() {
   return (
     <div>
       <Header title="Recipes Done" hasBtn={ false } />
-      <div>
-        <button
-          onClick={ () => setFilter('comida') }
-          data-testid="filter-by-food-btn"
-          type="button"
+      <Container
+        sx={{
+          marginTop: 3,
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <ButtonGroup
+          sx={{
+            alignSelf: 'center',
+          }}
         >
-          Food
-        </button>
-        <button
-          onClick={ () => setFilter('bebida') }
-          data-testid="filter-by-drink-btn"
-          type="button"
-        >
-          Drink
-        </button>
-        <button
-          onClick={ () => setFilter('all') }
-          data-testid="filter-by-all-btn"
-          type="button"
-        >
-          All
-        </button>
-      </div>
+          <Button
+            onClick={ () => setFilter('comida') }
+          >
+            Food
+          </Button>
+          <Button
+            onClick={ () => setFilter('bebida') }
+          >
+            Drink
+          </Button>
+          <Button
+            onClick={ () => setFilter('all') }
+          >
+            All
+          </Button>
+        </ButtonGroup>
+      </Container>
       {getStorage() !== null && getStorage()
         .filter((favorite) => (filter === 'all' ? favorite : favorite.type === filter))
         .map((rec, index) => (
