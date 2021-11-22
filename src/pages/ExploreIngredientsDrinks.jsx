@@ -17,7 +17,6 @@ function ExploreIngredientsDrinks() {
       setLoading(false);
     })();
   }, []);
-  console.log(ingredients);
 
   return (
     <div>

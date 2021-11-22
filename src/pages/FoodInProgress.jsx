@@ -13,6 +13,8 @@ import {
   FormGroup,
   Checkbox,
   FormControlLabel,
+  Container,
+  CircularProgress,
 } from '@material-ui/core';
 import RestaurantIcon from '@material-ui/icons/Restaurant';
 import CloseIcon from '@material-ui/icons/Close';
@@ -190,7 +192,22 @@ function FoodInProgress({ match: { params: { id } } }) {
 
   return (
     <div>
-      { api.meals !== undefined ? foodProgress() : <h1>loading</h1> }
+      { api.meals !== undefined
+        ? foodProgress()
+        : (
+          <Container
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              marginTop: '50%',
+            }}
+          >
+            <CircularProgress />
+            <h1>Loading...</h1>
+          </Container>
+      ) 
+      }
     </div>
   );
 }

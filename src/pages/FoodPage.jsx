@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import { Button, Container } from '@material-ui/core';
+import { Button, Container, CircularProgress } from '@material-ui/core';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import RestoreIcon from '@material-ui/icons/Restore';
 import DetailPage from '../components/DetailPage';
@@ -60,7 +60,19 @@ function FoodPage(props) {
     history.push(`/comidas/${id}/in-progress`);
   };
 
-  if (loading) return <h1>loading</h1>;
+  if (loading) return (
+    <Container
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginTop: '50%',
+      }}
+    >
+      <CircularProgress />
+      <h1>Loading...</h1>
+    </Container>
+) ;
 
   return (
     <Container

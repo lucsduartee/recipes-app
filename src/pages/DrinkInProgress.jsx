@@ -13,6 +13,8 @@ import {
   FormGroup,
   Checkbox,
   FormControlLabel,
+  CircularProgress,
+  Container,
 } from '@material-ui/core';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
 import CloseIcon from '@material-ui/icons/Close';
@@ -20,9 +22,6 @@ import ShareIcon from '@material-ui/icons/Share';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
 import GlobalContext from '../context/GlobalContext';
 import '../css/recipeProgress.css';
 import Footer from '../components/Footer';
@@ -40,7 +39,6 @@ function DrinkInProgress({ match: { params: { id } } }) {
     setisFavorite } = useContext(GlobalContext);
   const [api, saveApi] = useState({});
   const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState(false);
   const [check, setCheck] = useState({
     ingredientName: '',
     checked: '',
@@ -197,7 +195,22 @@ function DrinkInProgress({ match: { params: { id } } }) {
 
   return (
     <div>
-      { api.drinks !== undefined ? drinkProgress() : <h1>loading</h1> }
+      { api.drinks !== undefined
+        ? drinkProgress()
+        : (
+            <Container
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                marginTop: '50%',
+              }}
+            >
+              <CircularProgress />
+              <h1>Loading...</h1>
+            </Container>
+        )
+      }
     </div>
   );
 }
